@@ -19,9 +19,9 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
 ### Step by Step
 
-1. (Min 0) Log in to the AWS account console using the instructions shared by the workshop host, make sure you are working in the us-east-1 region.
+1. Log in to the AWS account console using the instructions shared by the workshop host, make sure you are working in the us-east-1 region.
 
-2. (Min 10) Use the provided Cloudformation template to create a cloudformation stack. Use "sdlf-workshop" as the stack name. Use the following command to deploy the Cloudformation Stack:
+2. Use the provided Cloudformation template to create a cloudformation stack. Use "sdlf-workshop" as the stack name. Use the following command to deploy the Cloudformation Stack:
 
     ```sh
     aws cloudformation deploy --stack-name sdlf-workshop --template-file ppb-sdlf-athena-workshop/template.yml --capabilities CAPABILITY_NAMED_IAM
@@ -29,13 +29,13 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
     Within 5-10 minutes, foundational CloudFormation stacks implementing the SDLF CICD are provisioned in CloudFormation. You can follow the progress of this operation in the CloudFormation console.
 
-3. While the previous step is being deployed, create a cloud9 enviornment,
-(timeout 4 hrs)
+3. While the previous step is being deployed, create a cloud9 enviornment:
+
 
     Using the default settings. (ensure ssm conectivity is selected)
     Once the step 2 is completed, and the Cloud9 environment is ready, navigate to Cloud9 in the AWS console and open the IDE.
 
-4. (Min 22) Run the command below in the Cloud9 instance terminal to pull the sdlf-foundations repository.
+4. Run the command below in the Cloud9 instance terminal to pull the sdlf-foundations repository.
 
     ```sh
     cd ~/environment
@@ -55,7 +55,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
     This will launch CloudFormation stacks to deploy the foundational data lake resources in the account. You can follow the progress of this operation in the CloudFormation console:
 
-5. (Min 35) Deploying a team. Once the foundations stacks are in CREATE_COMPLETE, we can provision an SDLF team.
+5. Deploying a team. Once the foundations stacks are in CREATE_COMPLETE, we can provision an SDLF team.
 
     - In the terminal, pull the sdlf-team repository using the following commands.
 
@@ -77,7 +77,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
     In parallel, some engineering Git repositories were also loaded into CodeCommit.
 
-6. (Min 50) Creating a Pipeline.
+6. Creating a Pipeline.
 
     At this point, the SDLF admin team has created the data lake foundations and provisioned an engineering team. They then provide the members of this team with access to their CodeCommit repositories so they can define their ETL process.
 
@@ -101,11 +101,11 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
     Using their own repository, the engineering team has deployed their first SDLF data pipeline, a logical construct representing an ETL process. A team can implement one or more pipelines depending on their needs. You can check the resources in the AWS console (For example, check the data pipelines created in Step Functions)
 
-7. (Min 60) Add the service role sdlf-engineering-cicd-codebuild as Lake Formation Administrator. Your final Lake Formation administrators should look like this:
+7. Add the service role sdlf-engineering-cicd-codebuild as Lake Formation Administrator. Your final Lake Formation administrators should look like this:
 
       ![Add  sdlf-engineering-cicd-codebuild role as Lake Formation Admin](./lakeformation-admin.png)
 
-8. (Min 65) Team Database (dataset) creation.
+8. Team Database (dataset) creation.
 
     Now you are ready to create databases for the deployed team. Here you will create raw, stage and analytics databases. Similar, as in the other steps, execute this commands in the Cloud9 environment terminal.
 
@@ -121,12 +121,12 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
     git push
     ```.
 
-9. (Min 75) Assign Full Lake Formation permission on all the databases to the sdlf-engineering-process-a and sdlf-engineering-process-b roles.
+9. Assign Full Lake Formation permission on all the databases to the sdlf-engineering-process-a and sdlf-engineering-process-b roles.
 
     - Give SUPER priviledges at the database resources.
     - Give SUPER priviledges to ALL_TABLES for each of the databases.
 
-10. (Min 85) Table create
+10. Table create
 
     ***IMPORTANT: Replace the placeholder <\<your-raw-bucket-name>> with the name of your Raw Bucket***. The bucket should be something like this: forecourt-datalake-dev-us-east-1-123456789-raw
 
@@ -194,7 +194,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
     LOCATION 's3://<<your-stage-bucket-name>>/engineering/tienda/items/';
     ```
 
-11. (Min 90) Trigger a pipeline execution, simulating the ingestion of a customer and items table. This will trigger a data pipeline that will populate the RAW and STAGE tables created in the previous step (customers and items, raw and stage, without partitions).
+11. Trigger a pipeline execution, simulating the ingestion of a customer and items table. This will trigger a data pipeline that will populate the RAW and STAGE tables created in the previous step (customers and items, raw and stage, without partitions).
 
     To simulate the arrival of new customer and items files, we will copy from the Cloud9 environment to the S3 raw bucket. Executing the following commands:
 
@@ -222,7 +222,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
     Additionally you can run ad-hoc queries in Athena to validate the data and pipeline execution. When executing Athena queries, please use the **engineering_main_workgroup** Athena Workgroup.
 
-12. (Min 120) Now we are going to run similar excercise, but with tables that contain partitions. Create the following tables via the Athena Query Console.
+12. Now we are going to run similar excercise, but with tables that contain partitions. Create the following tables via the Athena Query Console.
 
     ***IMPORTANT: Replace the placeholder <\<your-raw-bucket-name>> with the name of your Raw Bucket***. Inside the Athena query console, execute the following SQL statements:
 
@@ -328,7 +328,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
     LOCATION 's3://<<your-stage-bucket-name>>/engineering/tienda/sales_part/';
     ```
 
-13. (Min 130) Trigger pipeline executions for this partitioned tables, simulating the ingestion of a customer, items and sales table. This will trigger a data pipeline that will populate the RAW and STAGE tables created in the previous step (customers items and sales, raw and stage, with partitions).
+13. Trigger pipeline executions for this partitioned tables, simulating the ingestion of a customer, items and sales table. This will trigger a data pipeline that will populate the RAW and STAGE tables created in the previous step (customers items and sales, raw and stage, with partitions).
 
     To simulate the arrival of new customer, items and sales files, we will copy from the Cloud9 environment to the S3 raw bucket. Executing the following commands:
 
@@ -360,7 +360,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
     - Check the data pipeline (step function) sdlf-engineering-main-sm-a, and review the last executions.
     - Additionally you can run ad-hoc queries in Athena to validate the data and pipeline execution. **When executing Athena queries, please use the engineering_main_workgroup Athena Workgroup.**
 
-14. (Min 160) Now we will populate the analytics table. Start by first creating the target analytical table, running this SQL statement in the Athena query console.
+14. Now we will populate the analytics table. Start by first creating the target analytical table, running this SQL statement in the Athena query console.
 
     DDL-ANALYTICS-1 (CONSOLIDATED ANALYTICAL TABLE)
 
@@ -382,7 +382,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
     LOCATION 's3://<<your-analytics-bucket-name>>/engineering/tienda/consolidado/';
     ```
 
-15. (Min 165) We will configure the Heavy Transformation data pipeline, that will populate the CONSOLIDATED ANALYTICAL (db_engineering_tienda_analytics.consolidado) table based on some defined dependencies. In this exercise the CONSOLIDATED ANALYTICAL table will be populated everytime that we ingest data in the sales_part_stage table.
+15. We will configure the Heavy Transformation data pipeline, that will populate the CONSOLIDATED ANALYTICAL (db_engineering_tienda_analytics.consolidado) table based on some defined dependencies. In this exercise the CONSOLIDATED ANALYTICAL table will be populated everytime that we ingest data in the sales_part_stage table.
 
     To configure this data pipeline logic, we will create a DynamoDB item with the required parameters. Please create a item leveraging the following link and pasting the associated JSON file.
 
@@ -444,7 +444,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
     Run some ad-hoc queries in Athena so review the processing results.
 
-16. (Min 190) Now we will populate a second analytics table. Start by first creating the target analytical table, running this SQL statement in the Athena query console.
+16. Now we will populate a second analytics table. Start by first creating the target analytical table, running this SQL statement in the Athena query console.
 
     DDL-ANALYTICS-2 (CONSOLIDATED ANALYTICAL TABLE # 2)
 
@@ -466,7 +466,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
     LOCATION 's3://<<your-analytics-bucket-name>>/engineering/tienda/consolidado2/';
     ```
 
-17. (Min 200) We will modify the Heavy Transformation triggers and dependencies. Now we will trigger the analytical table with multiple dependencies. Similar to the previous step, this transformation will populate the CONSOLIDATED ANALYTICAL # 2 (db_engineering_tienda_analytics.consolidado2) table based on some defined stage dependencies. In this exercise the CONSOLIDATED ANALYTICAL table will be populated everytime that we ingest data in **any** of the sales_part_stage and items_part_stage table.
+17. We will modify the Heavy Transformation triggers and dependencies. Now we will trigger the analytical table with multiple dependencies. Similar to the previous step, this transformation will populate the CONSOLIDATED ANALYTICAL # 2 (db_engineering_tienda_analytics.consolidado2) table based on some defined stage dependencies. In this exercise the CONSOLIDATED ANALYTICAL table will be populated everytime that we ingest data in **any** of the sales_part_stage and items_part_stage table.
 
     To configure this data pipeline logic, we will create a DynamoDB item with the required parameters. Please create a item leveraging the following link and pasting the associated JSON file.
 
@@ -513,24 +513,19 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
     "steps": [
       {
       "db": "db_engineering_tienda_analytics",
-      "info": "SQL to insert into db_engineering_tienda_analytics.consolidado",
-      "sql": "insert into db_engineering_tienda_analytics.consolidado  SELECT sale_id, c.customer_id, i.item_id, c.name, i.name, price, quantity, amount, s.dt from db_engineering_tienda_stage.sales_part_stage s join db_engineering_tienda_stage.customers_part_stage c on s.customer_id = c.customer_id and s.dt = c.dt join db_engineering_tienda_stage.items_part_stage i on s.item_id = i.item_id and s.dt = i.dt where s.dt=  '$start_date'",
+      "info": "SQL to insert into db_engineering_tienda_analytics.consolidado2",
+      "sql": "insert into db_engineering_tienda_analytics.consolidado2  SELECT sale_id, c.customer_id, i.item_id, c.name, i.name, price, quantity, amount, s.dt from db_engineering_tienda_stage.sales_part_stage s join db_engineering_tienda_stage.customers_part_stage c on s.customer_id = c.customer_id and s.dt = c.dt join db_engineering_tienda_stage.items_part_stage i on s.item_id = i.item_id and s.dt = i.dt where s.dt=  '$start_date'",
       "sql_file": ""
       },
       {
       "db": "db_engineering_tienda_analytics",
-      "info": "SQL to insert into db_engineering_tienda_analytics.consolidado",
+      "info": "SQL to insert into db_engineering_tienda_analytics.consolidado2",
       "sql": "SELECT * from db_engineering_tienda_stage.sales_part_stage limit 10",
       "sql_file": ""
       }
     ]
     }
     ```
-
-      Notice that the sales table is going to update the same date partition on the consolidated table, but the items table will update the partition for the next day (Interval + 1).  Example:
-
-      - Sales with partition 14-08-23 will update analytical table partition 14-08-23
-      - Items with partition 14-08-23 will update analytical table partition 15-08-23
 
     Checkout, that this time we are running multiple SQL queries to populate the analytical table (db_engineering_tienda_analytics.consolidado2).
 
