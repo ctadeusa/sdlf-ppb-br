@@ -23,7 +23,7 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
 2. Use the provided Cloudformation template to create a cloudformation stack. Use "sdlf-workshop" as the stack name. Use Cloudformation to deploy the Stack:
 
-[template.yml](https://github.com/ctadeusa/sdlf-ppb-br/blob/main/template.yml "stack")
+    [template.yml](https://github.com/ctadeusa/sdlf-ppb-br/blob/main/template.yml "stack")
 
     Within 5-10 minutes, foundational CloudFormation stacks implementing the SDLF CICD are provisioned in CloudFormation. You can follow the progress of this operation in the CloudFormation console.
 
