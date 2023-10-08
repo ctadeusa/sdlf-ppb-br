@@ -21,11 +21,9 @@ Hands On Workshop where participants can learn how to deploy, configure and use 
 
 1. Log in to the AWS account console using the instructions shared by the workshop host, make sure you are working in the us-east-1 region.
 
-2. Use the provided Cloudformation template to create a cloudformation stack. Use "sdlf-workshop" as the stack name. Use the following command to deploy the Cloudformation Stack:
+2. Use the provided Cloudformation template to create a cloudformation stack. Use "sdlf-workshop" as the stack name. Use Cloudformation to deploy the Stack:
 
-    ```sh
-    aws cloudformation deploy --stack-name sdlf-workshop --template-file ppb-sdlf-athena-workshop/template.yml --capabilities CAPABILITY_NAMED_IAM
-    ```
+[template.yml](https://github.com/ctadeusa/sdlf-ppb-br/blob/main/template.yml "stack")
 
     Within 5-10 minutes, foundational CloudFormation stacks implementing the SDLF CICD are provisioned in CloudFormation. You can follow the progress of this operation in the CloudFormation console.
 
